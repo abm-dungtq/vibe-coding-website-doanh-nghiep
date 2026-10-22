@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="vi" data-theme="system">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tự làm website giới thiệu doanh nghiệp cùng Claude · Cẩm nang 9 bước</title>
+<meta name="description" content="Cẩm nang 9 bước cho người không biết code: dùng Claude Design và Claude Code làm website giới thiệu doanh nghiệp chuẩn SEO và AEO, kèm câu lệnh mẫu cho từng bước.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+/* ---------- Tokens ---------- */
+:root{
+  --font-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-display:"Lora",ui-serif,"New York","Iowan Old Style",Georgia,"Times New Roman",serif;
+  --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+
+  --paper:oklch(97.6% .012 80);
+  --paper-2:oklch(94.8% .016 78);
+  --ink:oklch(23% .02 55);
+  --muted:oklch(44% .02 60);
+  --line:oklch(87% .018 75);
+  --accent:oklch(54% .15 40);
+  --accent-ink:oklch(99% .005 80);
+  --accent-soft:oklch(92% .04 50);
+  --note:oklch(25% .02 55);
+  --note-ink:oklch(94% .012 80);
+  --note-muted:oklch(74% .02 70);
+  --ok:oklch(48% .1 150);
+  --ok-soft:oklch(93% .04 150);
+
+  --c1:oklch(54% .15 40);
+  --c2:oklch(50% .1 160);
+  --c3:oklch(50% .11 250);
+  --c4:oklch(50% .12 320);
+
+  --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem; --s5:1.5rem; --s6:2rem; --s7:3rem; --s8:4.5rem; --s9:7rem;
+  --r:10px; --r-lg:16px;
+  --t1:clamp(.82rem,.8rem + .1vw,.88rem);
+  --t2:clamp(1rem,.97rem + .15vw,1.08rem);
+  --t3:clamp(1.2rem,1.1rem + .4vw,1.4rem);
+  --t4:clamp(1.6rem,1.3rem + 1.2vw,2.3rem);
+  --t5:clamp(2.2rem,1.4rem + 3.6vw,4.4rem);
+  --read:44rem; --wide:68rem;
+  --dur:220ms; --ease:cubic-bezier(.2,.7,.2,1);
+  --shadow:0 1px 0 oklch(80% .02 70 / .5), 0 10px 30px -18px oklch(30% .04 50 / .35);
+}
+@media (prefers-color-scheme:dark){
+  :root[data-theme="system"]{
+    --paper:oklch(19.5% .012 60); --paper-2:oklch(23.5% .014 60); --ink:oklch(93% .012 80); --muted:oklch(74% .018 75);
+    --line:oklch(34% .016 60); --accent:oklch(73% .13 48); --accent-ink:oklch(20% .02 55); --accent-soft:oklch(30% .05 45);
+    --note:oklch(25.5% .016 60); --note-ink:oklch(93% .012 80); --note-muted:oklch(70% .02 70);
+    --ok:oklch(75% .11 150); --ok-soft:oklch(28% .04 150);
+    --c1:oklch(73% .13 48); --c2:oklch(72% .1 160); --c3:oklch(72% .1 250); --c4:oklch(72% .11 320);
+    --shadow:0 1px 0 oklch(40% .02 60 / .4), 0 12px 30px -16px oklch(0% 0 0 / .6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:oklch(19.5% .012 60); --paper-2:oklch(23.5% .014 60); --ink:oklch(93% .012 80); --muted:oklch(74% .018 75);
+  --line:oklch(34% .016 60); --accent:oklch(73% .13 48); --accent-ink:oklch(20% .02 55); --accent-soft:oklch(30% .05 45);
+  --note:oklch(25.5% .016 60); --note-ink:oklch(93% .012 80); --note-muted:oklch(70% .02 70);
+  --ok:oklch(75% .11 150); --ok-soft:oklch(28% .04 150);
+  --c1:oklch(73% .13 48); --c2:oklch(72% .1 160); --c3:oklch(72% .1 250); --c4:oklch(72% .11 320);
+  --shadow:0 1px 0 oklch(40% .02 60 / .4), 0 12px 30px -16px oklch(0% 0 0 / .6);
+}
+
+/* ---------- Base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:var(--t2);line-height:1.68;
+  text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.18;letter-spacing:-.01em;margin:0;text-wrap:balance}
+p{margin:0 0 var(--s4)}
+p,li{text-wrap:pretty}
+a{color:var(--accent);text-underline-offset:.18em;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+code{font-family:var(--font-mono);font-size:.88em;background:var(--paper-2);border:1px solid var(--line);border-radius:6px;padding:.05em .35em;overflow-wrap:anywhere}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:var(--s3);background:var(--ink);color:var(--paper);padding:var(--s2) var(--s4);border-radius:var(--r);z-index:10}
+.skip:focus{left:var(--s3)}
+.wrap{width:min(100% - 2.5rem, var(--wide));margin-inline:auto}
+.read{max-width:var(--read)}
+.eyebrow{font-size:var(--t1);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- Top bar ---------- */
+.topbar{position:sticky;top:0;z-index:5;background:color-mix(in oklch,var(--paper) 88%,transparent);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);min-height:3.5rem}
+.brand{font-family:var(--font-display);font-weight:600;font-size:1.02rem;color:var(--ink);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:inline-flex;align-items:center;min-height:44px}
+.brand span{color:var(--accent)}
+.theme{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;background:var(--paper)}
+.theme button{font:inherit;font-size:var(--t1);border:0;background:transparent;color:var(--muted);border-radius:999px;padding:.35rem .7rem;min-height:44px;min-width:44px;cursor:pointer}
+.theme button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+/* ---------- Hero ---------- */
+.hero{padding:clamp(3rem,7vw,6.5rem) 0 var(--s8);position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(60rem 26rem at 85% -10%,var(--accent-soft),transparent 70%);opacity:.9}
+.hero-grid{display:grid;grid-template-columns:1.25fr .95fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero h1{font-size:var(--t5);margin:var(--s4) 0 var(--s5)}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.lead{font-size:var(--t3);line-height:1.5;color:var(--muted);max-width:36rem}
+.hero-meta{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s5);margin-top:var(--s6);font-size:var(--t1);color:var(--muted)}
+.hero-meta b{display:block;font-family:var(--font-display);font-size:1.7rem;color:var(--ink);line-height:1.1}
+.cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:var(--s6);background:var(--ink);color:var(--paper);text-decoration:none;
+  padding:.85rem 1.3rem;border-radius:999px;font-weight:600;min-height:44px;transition:transform var(--dur) var(--ease)}
+.cta:hover{transform:translateY(-2px);text-decoration:none}
+
+/* Chat illustration */
+.chat{background:var(--note);color:var(--note-ink);border-radius:var(--r-lg);padding:var(--s5);box-shadow:var(--shadow);font-size:.93rem;line-height:1.55}
+.chat-head{display:flex;gap:6px;margin-bottom:var(--s4)}
+.chat-head i{width:10px;height:10px;border-radius:50%;background:oklch(55% .02 60)}
+.msg{border-radius:12px;padding:.7rem .9rem;margin-bottom:var(--s3);max-width:92%}
+.msg.you{background:oklch(34% .03 55);margin-left:auto}
+.msg.ai{background:oklch(30% .02 60);border:1px solid oklch(38% .02 60)}
+.msg small{display:block;color:var(--note-muted);font-size:.75rem;margin-bottom:2px}
+.opts{display:grid;gap:6px;margin-top:var(--s2)}
+.opts span{display:block;border:1px solid oklch(42% .02 60);border-radius:8px;padding:.35rem .6rem;font-size:.85rem}
+.opts span.rec{border-color:oklch(72% .13 48);color:oklch(88% .06 60)}
+
+/* Rail (signature) */
+.rail{margin-top:var(--s8);border-top:1px solid var(--line);padding-top:var(--s5)}
+.rail ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:0;position:relative}
+.rail ol::before{content:"";position:absolute;left:2%;right:2%;top:19px;height:2px;background:linear-gradient(90deg,var(--c1) 0 33%,var(--c2) 33% 55%,var(--c3) 55% 77%,var(--c4) 77%)}
+.rail li a{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;text-decoration:none;color:var(--muted);font-size:.78rem;line-height:1.3;padding:0 2px;min-height:44px}
+.rail .dot{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--paper);border:2px solid var(--k);color:var(--ink);
+  font-family:var(--font-display);font-weight:700;position:relative;transition:background var(--dur),color var(--dur)}
+.rail li a:hover .dot{background:var(--k);color:var(--paper)}
+.rail li a:hover{color:var(--ink)}
+.k1{--k:var(--c1)} .k2{--k:var(--c2)} .k3{--k:var(--c3)} .k4{--k:var(--c4)}
+
+/* ---------- Sections ---------- */
+section.block{padding:var(--s9) 0;border-top:1px solid var(--line)}
+section.block:nth-of-type(even){background:var(--paper-2)}
+.sec-head{margin-bottom:var(--s7)}
+.sec-head .tag{display:inline-flex;align-items:center;gap:.5rem;font-size:var(--t1);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--k,var(--accent))}
+.sec-head .tag::before{content:"";width:22px;height:2px;background:currentColor}
+.sec-head h2{font-size:var(--t4);margin-top:var(--s3);max-width:30ch}
+.sec-head p{color:var(--muted);margin-top:var(--s4);max-width:var(--read)}
+
+/* Principles */
+.principles{list-style:none;padding:0;margin:var(--s6) 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:var(--s4)}
+.principles li{border-top:2px solid var(--ink);padding-top:var(--s3)}
+.principles b{display:block;font-family:var(--font-display);font-size:1.12rem;margin-bottom:var(--s1)}
+.principles span{color:var(--muted);font-size:.95rem}
+
+/* Diagram */
+.diagram{margin:var(--s7) 0 0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s5)}
+.diagram svg{width:100%;height:auto;display:block}
+.diagram figcaption{font-size:var(--t1);color:var(--muted);margin-top:var(--s3)}
+.dg-box{fill:var(--paper-2);stroke:var(--line)}
+.dg-title{font:600 17px var(--font-display);fill:var(--ink)}
+.dg-sub{font:400 12.5px var(--font-body);fill:var(--muted)}
+.dg-num{font:700 12px var(--font-body);letter-spacing:.06em}
+.dg-arrow{stroke:var(--muted);stroke-width:1.6;fill:none}
+.dg-loop{stroke:var(--accent);stroke-width:1.6;fill:none;stroke-dasharray:5 5}
+.dg-loop-t{font:500 12.5px var(--font-body);fill:var(--accent)}
+.diagram .mobile-flow{display:none}
+
+/* Glossary */
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:var(--s3) var(--s5);margin:var(--s6) 0 0;padding:0}
+.gloss div{padding:var(--s3) 0;border-bottom:1px dashed var(--line)}
+.gloss dt{font-weight:600}
+.gloss dd{margin:0;color:var(--muted);font-size:.95rem}
+
+/* ---------- Steps ---------- */
+.step{display:grid;grid-template-columns:6.5rem minmax(0,1fr);gap:var(--s5);padding:var(--s7) 0;border-top:1px dashed var(--line)}
+.step:first-of-type,.step-cont{border-top:0;padding-top:0}
+.step-num{font-family:var(--font-display);font-size:4.2rem;line-height:.9;font-weight:700;color:var(--k);position:sticky;top:5rem;align-self:start}
+.step-num small{display:block;font-family:var(--font-body);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.step h3{font-size:var(--t4);margin-bottom:var(--s4)}
+.goal{display:flex;gap:var(--s3);align-items:baseline;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--k);border-radius:var(--r);padding:var(--s3) var(--s4);margin-bottom:var(--s5)}
+.goal b{font-size:var(--t1);text-transform:uppercase;letter-spacing:.06em;color:var(--k);white-space:nowrap}
+.step-body{max-width:var(--read)}
+.step-body ul{padding-left:1.15rem;margin:0 0 var(--s4)}
+.step-body li{margin-bottom:var(--s2)}
+.step-body li::marker{color:var(--k)}
+.aside{font-size:.95rem;color:var(--muted);border-left:2px solid var(--line);padding-left:var(--s4);margin:var(--s5) 0}
+.aside strong{color:var(--ink)}
+.warn{background:var(--accent-soft);border-radius:var(--r);padding:var(--s3) var(--s4);font-size:.95rem;margin:var(--s4) 0}
+
+/* Prompt card */
+.prompt{margin:var(--s5) 0;background:var(--note);color:var(--note-ink);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
+.prompt figcaption{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);padding:.6rem .6rem .6rem 1.1rem;
+  border-bottom:1px solid oklch(36% .02 60);font-size:var(--t1);color:var(--note-muted)}
+.prompt figcaption b{color:var(--note-ink);font-weight:600}
+.prompt figcaption>span{min-width:0;flex:1}
+.prompt pre{margin:0;padding:var(--s4) 1.1rem var(--s5);white-space:pre-wrap;word-break:break-word;font-family:var(--font-body);font-size:.97rem;line-height:1.65}
+.prompt .ph{color:oklch(82% .1 65);font-weight:500}
+.copy{font:inherit;font-size:.82rem;font-weight:600;border:1px solid oklch(44% .02 60);background:transparent;color:var(--note-ink);
+  border-radius:999px;padding:.5rem .95rem;min-height:44px;min-width:44px;cursor:pointer;transition:background var(--dur),border-color var(--dur);white-space:nowrap;flex:none}
+.copy:hover{background:oklch(34% .02 60)}
+.copy[data-done]{border-color:oklch(72% .12 150);color:oklch(85% .1 150)}
+
+/* Done-when */
+.done{display:flex;gap:var(--s3);align-items:flex-start;background:var(--ok-soft);border-radius:var(--r);padding:var(--s4);margin-top:var(--s5)}
+.done svg{flex:none;width:22px;height:22px;margin-top:2px;color:var(--ok)}
+.done b{color:var(--ok)}
+.done p{margin:0}
+
+/* Mockup */
+.mock{margin:var(--s6) 0;display:grid;grid-template-columns:minmax(0,1fr) 15rem;gap:var(--s5);align-items:start}
+.mock-frame{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow)}
+.mock-bar{display:flex;gap:5px;padding:.55rem .8rem;border-bottom:1px solid var(--line);background:var(--paper-2)}
+.mock-bar i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.mock-body{padding:var(--s4);display:grid;gap:var(--s3);font-size:.78rem}
+.mk{border-radius:8px;border:1px dashed var(--line);padding:.6rem .7rem;position:relative;color:var(--muted)}
+.mk .pin{position:absolute;top:-9px;left:-9px;width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:700;font-size:.72rem}
+.mk-hero{background:var(--accent-soft);border-style:solid;border-color:transparent;padding:1rem}
+.mk-hero b{display:block;font-family:var(--font-display);font-size:1rem;color:var(--ink)}
+.mk-btn{display:inline-block;margin-top:.5rem;background:var(--ink);color:var(--paper);border-radius:999px;padding:.2rem .7rem;font-size:.72rem}
+.mk-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.mk-row span{height:2.4rem;border-radius:6px;background:var(--paper-2);border:1px solid var(--line)}
+.mk-faq span{display:block;border-bottom:1px solid var(--line);padding:.25rem 0}
+.notes{list-style:none;counter-reset:n;margin:0;padding:0;display:grid;gap:var(--s3);font-size:.9rem}
+.notes li{counter-increment:n;display:grid;grid-template-columns:22px 1fr;gap:var(--s2)}
+.notes li::before{content:counter(n);width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:700;font-size:.72rem}
+
+/* Two-col checklist */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);margin:var(--s5) 0}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s5)}
+.card h4{font-family:var(--font-display);font-size:1.15rem;margin:0 0 var(--s3)}
+.card ul{margin:0;padding-left:1.1rem;font-size:.95rem}
+.card li{margin-bottom:var(--s2)}
+
+/* Cheatsheet */
+.mantras{list-style:none;padding:0;margin:var(--s5) 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:var(--s3)}
+.mantras li{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:var(--s3) var(--s3) var(--s3) var(--s4);
+  font-family:var(--font-display);font-size:1.05rem;line-height:1.4}
+.mantras .copy{color:var(--ink);border-color:var(--line);font-family:var(--font-body)}
+.mantras .copy:hover{background:var(--paper-2)}
+.mistakes{counter-reset:m;list-style:none;padding:0;margin:var(--s5) 0 0;display:grid;gap:var(--s3)}
+.mistakes li{counter-increment:m;display:grid;grid-template-columns:2.4rem 1fr;gap:var(--s3);align-items:baseline}
+.mistakes li::before{content:"0" counter(m);font-family:var(--font-display);font-weight:700;color:var(--accent);font-size:1.2rem}
+h3.sub{font-size:var(--t3);margin-top:var(--s8)}
+
+/* Footer */
+footer{padding:var(--s8) 0 var(--s7);border-top:1px solid var(--line);font-size:.92rem;color:var(--muted)}
+footer h2{font-size:var(--t3);color:var(--ink);margin-bottom:var(--s4)}
+.refs{padding-left:1.2rem;margin:0;display:grid;gap:var(--s2)}
+.refs a{overflow-wrap:anywhere}
+.fine{margin-top:var(--s6);font-size:var(--t1)}
+
+/* Reveal */
+.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none;transition:none}
+  .cta,.copy,.rail .dot{transition:none}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr}
+  .mock{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .rail ol{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:var(--s4)}
+  .rail ol::before{display:none}
+  .step{grid-template-columns:1fr;gap:var(--s3)}
+  .step .spacer{display:none}
+  .step-num{position:static;font-size:3rem;display:flex;align-items:baseline;gap:var(--s3)}
+  .step-num small{margin:0}
+  .cols{grid-template-columns:1fr}
+  .diagram .desk-flow{display:none}
+  .diagram .mobile-flow{display:block}
+  section.block{padding:var(--s8) 0}
+  .theme button{padding:.35rem .55rem}
+}
+@media (max-width:420px){
+  .brand{font-size:.92rem}
+  .goal{flex-direction:column;gap:var(--s1)}
+}
+@media print{
+  .topbar,.copy,.theme,.cta{display:none}
+  .js .reveal{opacity:1;transform:none}
+  section.block{padding:var(--s6) 0;background:none!important}
+  .prompt{box-shadow:none;border:1px solid #999;background:#fff;color:#000}
+  .prompt figcaption{color:#333}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#noi-dung">Bỏ qua, tới nội dung</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">Vibe coding <span>·</span> website doanh nghiệp</a>
+    <div class="theme" role="group" aria-label="Giao diện">
+      <button type="button" data-set="system" aria-pressed="true">Hệ thống</button>
+      <button type="button" data-set="light" aria-pressed="false">Sáng</button>
+      <button type="button" data-set="dark" aria-pressed="false">Tối</button>
+    </div>
+  </div>
+</header>
+
+<main id="noi-dung">
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Cẩm nang thực hành · 2026</span>
+        <h1>Tự làm website doanh nghiệp cùng Claude, <em>không cần biết code</em></h1>
+        <p class="lead">Claude Design vẽ giao diện, Claude Code viết mã và đưa trang lên mạng, còn bạn giữ vai chủ dự án. Chín bước, mỗi bước có việc cần làm, câu lệnh mẫu để dán vào Claude và dấu hiệu để biết đã xong.</p>
+        <div class="hero-meta">
+          <div><b>9</b>bước làm</div>
+          <div><b>4</b>chặng</div>
+          <div><b>20+</b>câu lệnh mẫu</div>
+          <div><b>SEO + AEO</b>chuẩn từ đầu</div>
+        </div>
+        <a class="cta" href="#tong-quan">Bắt đầu đọc <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="chat" role="img" aria-label="Minh họa: bạn nhờ Claude làm website, Claude hỏi lại bằng câu hỏi có lựa chọn và gợi ý phương án nên chọn">
+        <div class="chat-head" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="msg you"><small>Bạn</small>Chưa viết mã. Tôi muốn làm website giới thiệu cho xưởng nội thất của tôi. Hỏi tôi những gì còn thiếu.</div>
+        <div class="msg ai"><small>Claude</small>Câu 1/4: Khách nên liên hệ bạn bằng cách nào là chính?
+          <div class="opts"><span class="rec">Gọi điện hoặc nhắn Zalo (khuyên dùng: khách địa phương quen kênh này)</span><span>Điền form trên website</span><span>Email</span></div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="rail" aria-label="Chín bước">
+      <ol>
+        <li class="k1"><a href="#buoc-0"><span class="dot">0</span>Chuẩn bị</a></li>
+        <li class="k1"><a href="#buoc-1"><span class="dot">1</span>Chốt mục tiêu</a></li>
+        <li class="k1"><a href="#buoc-2"><span class="dot">2</span>Khách tìm gì</a></li>
+        <li class="k2"><a href="#buoc-3"><span class="dot">3</span>Thiết kế</a></li>
+        <li class="k2"><a href="#buoc-4"><span class="dot">4</span>Kế hoạch</a></li>
+        <li class="k3"><a href="#buoc-5"><span class="dot">5</span>Dựng trang</a></li>
+        <li class="k3"><a href="#buoc-6"><span class="dot">6</span>SEO &amp; AEO</a></li>
+        <li class="k4"><a href="#buoc-7"><span class="dot">7</span>Kiểm thử</a></li>
+        <li class="k4"><a href="#buoc-8"><span class="dot">8</span>Lên mạng</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- ================= TỔNG QUAN ================= -->
+<section class="block" id="tong-quan">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">Trước khi bắt đầu</span>
+      <h2>Vibe coding là gì và vì sao cần một quy trình</h2>
+    </div>
+    <div class="read reveal">
+      <p>Vibe coding là cách làm phần mềm bằng trò chuyện: bạn mô tả điều mình muốn bằng tiếng Việt, AI viết mã, bạn xem kết quả rồi góp ý tiếp. Bạn không cần biết lập trình, nhưng vẫn phải làm tốt ba việc của người chủ dự án: nói rõ mình cần gì, duyệt kết quả và ra quyết định.</p>
+      <p>Làm theo cảm hứng thuần túy thường hỏng ở cùng một chỗ. Claude phải đoán những điều bạn chưa nói, tự điền số liệu cho đủ chỗ trống, sửa chỗ này làm hỏng chỗ kia. Cẩm nang này dùng một quy trình kỷ luật hơn: chốt mục tiêu trước khi viết mã, làm từng phần nhỏ, và chỉ tin vào bằng chứng nhìn thấy được.</p>
+      <p><strong>SEO</strong> là việc giúp website được Google tìm thấy và xếp hạng. <strong>AEO</strong> (tối ưu cho công cụ trả lời) là việc giúp nội dung của bạn được ChatGPT, Perplexity hay phần tổng quan AI của Google trích dẫn khi khách đặt câu hỏi. Theo hướng dẫn của Google, tối ưu cho tìm kiếm bằng AI vẫn là SEO và không cần loại đánh dấu riêng nào. Nền tảng của cả hai vì vậy giống nhau: nội dung thật, trả lời thẳng câu hỏi khách hay hỏi, thông tin doanh nghiệp nhất quán ở mọi nơi.</p>
+    </div>
+
+    <h3 class="sub reveal">Năm nguyên tắc dùng xuyên suốt</h3>
+    <ol class="principles reveal">
+      <li><b>Chốt trước, làm sau</b><span>Chưa viết dòng mã nào khi hai bên chưa thống nhất kết quả, giới hạn, việc không làm và cách nghiệm thu.</span></li>
+      <li><b>Để Claude hỏi bạn</b><span>Thiếu thông tin thì Claude phải hỏi, không được đoán.</span></li>
+      <li><b>Mỗi lần một phần nhỏ</b><span>Làm xong phần nào, kiểm tra và lưu phần đó.</span></li>
+      <li><b>Tin bằng chứng</b><span>"Đã xong" phải đi kèm ảnh chụp, đường link mở được hoặc điểm kiểm tra.</span></li>
+      <li><b>Không bịa</b><span>Năm kinh nghiệm, khách hàng, chứng nhận phải là thật. Thiếu thì để ô [CẦN BỔ SUNG].</span></li>
+    </ol>
+
+    <figure class="diagram reveal">
+      <svg class="desk-flow" viewBox="0 0 1000 250" role="img" aria-labelledby="dg-t dg-d">
+        <title id="dg-t">Bốn chặng, chín bước</title>
+        <desc id="dg-d">Chặng 1 làm rõ gồm bước 0 đến 2; chặng 2 thiết kế gồm bước 3 và 4; chặng 3 xây dựng gồm bước 5 và 6; chặng 4 phát hành gồm bước 7 và 8. Khi kiểm thử phát hiện lỗi thì quay lại bước 5.</desc>
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor" style="color:var(--muted)"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--accent)"/></marker></defs>
+        <g>
+          <rect class="dg-box" x="10" y="40" width="215" height="130" rx="14"/>
+          <rect x="10" y="40" width="215" height="5" rx="2" style="fill:var(--c1)"/>
+          <text class="dg-num" x="30" y="76" style="fill:var(--c1)">CHẶNG 1 · BƯỚC 0–2</text>
+          <text class="dg-title" x="30" y="104">Làm rõ</text>
+          <text class="dg-sub" x="30" y="128">Chuẩn bị, chốt mục tiêu,</text>
+          <text class="dg-sub" x="30" y="147">tìm hiểu khách tìm gì</text>
+        </g>
+        <g>
+          <rect class="dg-box" x="265" y="40" width="215" height="130" rx="14"/>
+          <rect x="265" y="40" width="215" height="5" rx="2" style="fill:var(--c2)"/>
+          <text class="dg-num" x="285" y="76" style="fill:var(--c2)">CHẶNG 2 · BƯỚC 3–4</text>
+          <text class="dg-title" x="285" y="104">Thiết kế</text>
+          <text class="dg-sub" x="285" y="128">Claude Design dựng mẫu,</text>
+          <text class="dg-sub" x="285" y="147">lập kế hoạch theo giai đoạn</text>
+        </g>
+        <g>
+          <rect class="dg-box" x="520" y="40" width="215" height="130" rx="14"/>
+          <rect x="520" y="40" width="215" height="5" rx="2" style="fill:var(--c3)"/>
+          <text class="dg-num" x="540" y="76" style="fill:var(--c3)">CHẶNG 3 · BƯỚC 5–6</text>
+          <text class="dg-title" x="540" y="104">Xây dựng</text>
+          <text class="dg-sub" x="540" y="128">Claude Code dựng từng phần,</text>
+          <text class="dg-sub" x="540" y="147">tối ưu SEO và AEO</text>
+        </g>
+        <g>
+          <rect class="dg-box" x="775" y="40" width="215" height="130" rx="14"/>
+          <rect x="775" y="40" width="215" height="5" rx="2" style="fill:var(--c4)"/>
+          <text class="dg-num" x="795" y="76" style="fill:var(--c4)">CHẶNG 4 · BƯỚC 7–8</text>
+          <text class="dg-title" x="795" y="104">Phát hành</text>
+          <text class="dg-sub" x="795" y="128">Kiểm thử, kiểm duyệt,</text>
+          <text class="dg-sub" x="795" y="147">đưa lên Vercel, chăm sóc</text>
+        </g>
+        <path class="dg-arrow" d="M228 105H261" marker-end="url(#ah)"/>
+        <path class="dg-arrow" d="M483 105H516" marker-end="url(#ah)"/>
+        <path class="dg-arrow" d="M738 105H771" marker-end="url(#ah)"/>
+        <path class="dg-loop" d="M880 174C880 228 640 228 630 178" marker-end="url(#ah2)"/>
+        <text class="dg-loop-t" x="672" y="240">phát hiện lỗi → quay lại sửa đúng phần lỗi</text>
+      </svg>
+      <ol class="mobile-flow principles" aria-label="Bốn chặng">
+        <li style="border-color:var(--c1)"><b>Chặng 1 · Làm rõ</b><span>Bước 0–2: chuẩn bị, chốt mục tiêu, tìm hiểu khách tìm gì.</span></li>
+        <li style="border-color:var(--c2)"><b>Chặng 2 · Thiết kế</b><span>Bước 3–4: Claude Design dựng mẫu, lập kế hoạch.</span></li>
+        <li style="border-color:var(--c3)"><b>Chặng 3 · Xây dựng</b><span>Bước 5–6: dựng từng phần, tối ưu SEO và AEO.</span></li>
+        <li style="border-color:var(--c4)"><b>Chặng 4 · Phát hành</b><span>Bước 7–8: kiểm thử, đưa lên mạng. Gặp lỗi thì quay lại bước 5.</span></li>
+      </ol>
+      <figcaption>Khi kiểm thử phát hiện lỗi, quay lại bước 5 sửa đúng phần lỗi rồi kiểm lại. Vòng lặp này bình thường, không phải thất bại.</figcaption>
+    </figure>
+
+    <h3 class="sub reveal">Vài từ sẽ gặp</h3>
+    <dl class="gloss reveal">
+      <div><dt>Câu lệnh (prompt)</dt><dd>Đoạn yêu cầu bạn gõ cho Claude bằng ngôn ngữ thường.</dd></div>
+      <div><dt>Kho mã (repository)</dt><dd>Thư mục chứa mã nguồn website, lưu trên GitHub kèm lịch sử thay đổi.</dd></div>
+      <div><dt>Commit</dt><dd>Một điểm lưu, như điểm lưu khi chơi game. Hỏng thì quay về được.</dd></div>
+      <div><dt>Build</dt><dd>Bước biến mã nguồn thành website hoàn chỉnh. Build lỗi nghĩa là còn hỏng.</dd></div>
+      <div><dt>Triển khai (deploy)</dt><dd>Đưa website lên máy chủ để ai cũng truy cập được.</dd></div>
+      <div><dt>JSON-LD</dt><dd>Đoạn mô tả doanh nghiệp theo chuẩn để máy tìm kiếm đọc hiểu.</dd></div>
+      <div><dt>Sitemap</dt><dd>Danh sách các trang của website, gửi cho Google để dễ tìm.</dd></div>
+      <div><dt>Lighthouse</dt><dd>Công cụ chấm điểm tốc độ, khả năng truy cập và SEO của trang.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ================= CHẶNG 1 ================= -->
+<section class="block k1" id="chang-1">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">Chặng 1 · Làm rõ</span>
+      <h2>Biết rõ mình cần gì trước khi Claude viết dòng mã đầu tiên</h2>
+    </div>
+
+    <article class="step" id="buoc-0">
+      <div class="step-num"><small>Bước</small>0</div>
+      <div class="step-body reveal">
+        <h3>Chuẩn bị công cụ</h3>
+        <div class="goal"><b>Mục tiêu</b><span>Có đủ tài khoản và mở được Claude Code trong một thư mục dự án riêng.</span></div>
+        <ul>
+          <li><strong>Tài khoản Claude gói Pro trở lên.</strong> Gói miễn phí không có Claude Code. Giá tham khảo năm 2026 là 20 USD/tháng; kiểm tra lại trên trang giá của Claude trước khi đăng ký.</li>
+          <li><strong>Claude Code.</strong> Cách dễ nhất cho người mới là tab Code trong ứng dụng Claude trên máy tính. Nếu muốn dùng cửa sổ dòng lệnh, trên macOS hoặc Linux chạy <code>curl -fsSL https://claude.ai/install.sh | bash</code>; Windows có lệnh riêng trong tài liệu cài đặt chính thức.</li>
+          <li><strong>Claude Design</strong>, công cụ thiết kế của Anthropic Labs, đang ở giai đoạn thử nghiệm và mở cho các gói trả phí.</li>
+          <li><strong>Tài khoản GitHub</strong> để lưu mã nguồn kèm lịch sử thay đổi.</li>
+          <li><strong>Tài khoản Vercel</strong> để đưa website lên mạng.</li>
+          <li><strong>Tên miền riêng</strong>, trả phí hằng năm theo nhà cung cấp.</li>
+          <li><strong>Tư liệu thật:</strong> logo, ảnh sản phẩm, ảnh đội ngũ, văn bản giới thiệu sẵn có.</li>
+        </ul>
+        <p class="warn">Gói Hobby miễn phí của Vercel chỉ dành cho dự án cá nhân, phi thương mại. Website giới thiệu doanh nghiệp được Vercel xếp vào mục đích thương mại nên cần gói Pro trả phí.</p>
+        <p class="aside"><strong>Ngại cửa sổ dòng lệnh?</strong> Bạn không phải tự gõ lệnh. Bạn gõ yêu cầu bằng tiếng Việt, Claude đề xuất lệnh và xin phép trước khi chạy. Đọc lời giải thích, thấy hợp lý thì đồng ý; chưa hiểu thì hỏi lại. Nhấn <code>Esc</code> bất cứ lúc nào để Claude dừng tay.</p>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu</b> · Kiểm tra máy</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Tôi không biết lập trình. Tôi muốn làm website giới thiệu doanh nghiệp bằng Astro và đưa lên Vercel. Trước tiên, kiểm tra máy tôi đã có Node.js và Git chưa. Thiếu thứ gì thì hướng dẫn tôi cài từng bước bằng ngôn ngữ đời thường, chờ tôi xác nhận xong mới sang bước tiếp theo.</pre>
+        </figure>
+        <div class="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><p><b>Xong khi:</b> Claude báo máy đã có Node.js và Git, bạn đang mở Claude Code trong một thư mục trống dành riêng cho dự án.</p></div>
+      </div>
+    </article>
+
+    <article class="step" id="buoc-1">
+      <div class="step-num"><small>Bước</small>1</div>
+      <div class="step-body reveal">
+        <h3>Chốt mục tiêu và để Claude phỏng vấn bạn</h3>
+        <div class="goal"><b>Mục tiêu</b><span>Có bản cam kết dự án bạn đọc hiểu và đồng ý từng dòng, cùng một file thông tin doanh nghiệp chỉ chứa dữ kiện thật.</span></div>
+        <p>Bản cam kết gồm bốn phần. <strong>Kết quả</strong> mô tả website trông thế nào và giúp gì cho việc kinh doanh. <strong>Ràng buộc</strong> ghi công nghệ, ngân sách, thời hạn. <strong>Ngoài phạm vi</strong> liệt kê những việc dự án này không làm, để Claude không tự mở rộng. <strong>Tiêu chí nghiệm thu</strong> là những điều bạn tự kiểm tra được khi bàn giao.</p>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 1</b> · Lập bản cam kết</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Chưa viết mã. Tôi muốn làm website giới thiệu cho <span class="ph">[tên doanh nghiệp]</span>, lĩnh vực <span class="ph">[ngành nghề]</span>, khách hàng chính là <span class="ph">[ai]</span>, hoạt động tại <span class="ph">[khu vực]</span>. Giúp tôi lập bản cam kết dự án gồm bốn phần:
+(1) Kết quả: khi xong, website trông thế nào và giúp gì cho doanh nghiệp;
+(2) Ràng buộc: dùng Astro, triển khai trên Vercel, ngân sách và thời hạn;
+(3) Ngoài phạm vi: những việc dự án này không làm;
+(4) Tiêu chí nghiệm thu: những điều tôi tự kiểm tra được.
+Ghi vào file docs/cam-ket-du-an.md. Chỗ nào chưa rõ thì ghi "cần hỏi", không tự đoán.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 2</b> · Để Claude phỏng vấn</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Đọc docs/cam-ket-du-an.md rồi phỏng vấn tôi để làm rõ các mục "cần hỏi". Mỗi lượt hỏi tối đa 4 câu. Mỗi câu đưa 2 đến 4 lựa chọn cụ thể, đánh dấu lựa chọn bạn khuyên dùng và nói lý do trong một dòng. Không hỏi lại điều đã có trong file. Tôi trả lời xong thì cập nhật file và cho tôi biết còn gì chưa chốt.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 3</b> · Gom tư liệu doanh nghiệp</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Tạo file docs/thong-tin-doanh-nghiep.md với các mục: giới thiệu ngắn, lịch sử, sản phẩm và dịch vụ (tên, mô tả, giá nếu công khai), quy trình làm việc, lý do khách chọn chúng tôi, đội ngũ, chứng nhận, khách hàng tiêu biểu (chỉ khi được phép nêu tên), địa chỉ, giờ làm việc, điện thoại, email, Zalo, mạng xã hội. Tôi sẽ dán thông tin vào sau. Mục nào tôi chưa cung cấp thì để [CẦN BỔ SUNG], tuyệt đối không tự điền.</pre>
+        </figure>
+        <p class="aside"><strong>Mẹo:</strong> Claude Code có thể hiện câu hỏi dạng chọn đáp án. Bạn chỉ cần bấm, hoặc chọn mục khác để gõ câu trả lời riêng.</p>
+        <div class="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><p><b>Xong khi:</b> file cam kết không còn mục "cần hỏi", file thông tin doanh nghiệp có tên, địa chỉ, số điện thoại và mô tả dịch vụ thật.</p></div>
+      </div>
+    </article>
+
+    <article class="step" id="buoc-2">
+      <div class="step-num"><small>Bước</small>2</div>
+      <div class="step-body reveal">
+        <h3>Tìm hiểu khách hàng tìm gì</h3>
+        <div class="goal"><b>Mục tiêu</b><span>Biết khách gõ gì trên Google và hỏi AI điều gì, để mỗi trang trả lời đúng những câu đó.</span></div>
+        <p>Bước này đi trước thiết kế vì danh sách câu hỏi quyết định website cần những trang nào. Một website giới thiệu doanh nghiệp thường có Trang chủ, Giới thiệu, Dịch vụ (mỗi dịch vụ chính một trang), Dự án hoặc Khách hàng, Câu hỏi thường gặp, Liên hệ và Chính sách bảo mật.</p>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu</b> · Nghiên cứu tìm kiếm</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Đọc docs/thong-tin-doanh-nghiep.md, sau đó tìm trên web và lập file docs/nghien-cuu-tim-kiem.md gồm:
+- 15 đến 20 cụm từ khách hay gõ khi tìm dịch vụ như của tôi tại <span class="ph">[khu vực]</span>;
+- 10 đến 15 câu hỏi thật khách hay hỏi, lấy từ mục "Mọi người cũng hỏi" của Google, diễn đàn, nhóm Facebook và đánh giá trên Google Maps;
+- 3 website đối thủ cùng điểm mạnh, điểm yếu trong nội dung của họ.
+Ghi nguồn cho từng phát hiện. Cuối file, đề xuất sơ đồ các trang và mỗi trang nhắm vào cụm từ, câu hỏi nào.</pre>
+        </figure>
+        <div class="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><p><b>Xong khi:</b> bạn có danh sách câu hỏi thật kèm nguồn và đã duyệt sơ đồ trang.</p></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= CHẶNG 2 ================= -->
+<section class="block k2" id="chang-2">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">Chặng 2 · Thiết kế</span>
+      <h2>Duyệt bằng mắt trước, rồi mới lập kế hoạch dựng</h2>
+    </div>
+
+    <article class="step" id="buoc-3">
+      <div class="step-num"><small>Bước</small>3</div>
+      <div class="step-body reveal">
+        <h3>Thiết kế trên Claude Design</h3>
+        <div class="goal"><b>Mục tiêu</b><span>Có bản thiết kế đã duyệt trên cả điện thoại lẫn máy tính, kèm gói bàn giao cho Claude Code.</span></div>
+        <p>Claude Design dựng bản mẫu giao diện qua trò chuyện. Bạn góp ý bằng bình luận ngay trên bản vẽ, sửa chữ trực tiếp, kéo thanh trượt để chỉnh. Khi ưng ý, công cụ đóng gói thiết kế thành gói bàn giao để Claude Code dựng thành website thật; bạn cũng có thể xuất ra HTML hoặc PDF. Tải gói bàn giao (hoặc file xuất ra) về máy và chép vào thư mục design/ trong dự án để Claude Code đọc được.</p>
+      </div>
+    </article>
+    <div class="mock reveal" aria-label="Bản phác trang chủ có chú thích">
+      <div class="mock-frame">
+        <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="mock-body">
+          <div class="mk mk-hero"><span class="pin">1</span><b>Thiết kế và thi công nội thất gỗ cho căn hộ tại Đà Nẵng</b>Xưởng Mộc An (ví dụ minh họa)<br><span class="mk-btn">Gọi ngay · Nhắn Zalo</span></div>
+          <div class="mk"><span class="pin">2</span>Dịch vụ chính<div class="mk-row" aria-hidden="true"><span></span><span></span><span></span></div></div>
+          <div class="mk"><span class="pin">3</span>Vì sao chọn chúng tôi · chỉ dữ kiện thật, thiếu thì [CẦN BỔ SUNG]</div>
+          <div class="mk mk-faq"><span class="pin">4</span>Câu hỏi thường gặp<span>Thi công một căn hộ mất bao lâu?</span><span>Có bảo hành không?</span></div>
+          <div class="mk"><span class="pin">5</span>Liên hệ · địa chỉ · giờ mở cửa · bản đồ</div>
+        </div>
+      </div>
+      <ol class="notes">
+        <li><span>Một câu nói rõ làm gì, cho ai, ở đâu. Đây cũng là câu AI dễ trích nhất.</span></li>
+        <li><span>Mỗi dịch vụ dẫn tới trang riêng, nhắm một nhóm câu hỏi ở bước 2.</span></li>
+        <li><span>Không số liệu tự đặt ra. Chưa có thì để trống cho bạn bổ sung.</span></li>
+        <li><span>Câu hỏi lấy từ khách thật, câu trả lời thẳng hai, ba câu.</span></li>
+        <li><span>Tên, địa chỉ, số điện thoại viết giống hệt Google Business Profile.</span></li>
+      </ol>
+    </div>
+    <div class="step step-cont">
+      <div class="spacer" aria-hidden="true"></div>
+      <div class="step-body reveal">
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 1</b> · Hệ thống thiết kế (dán vào Claude Design)</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Tôi tải lên logo, ảnh thật và các file trong thư mục docs/. Dựng hệ thống thiết kế cho <span class="ph">[tên doanh nghiệp]</span>: bảng màu lấy từ logo, cặp phông chữ hiển thị tốt tiếng Việt có dấu, kiểu nút, khoảng cách và bo góc thống nhất. Cảm giác tôi muốn: <span class="ph">[ví dụ: ấm áp, mộc mạc, đáng tin]</span>. Tránh vẻ mẫu dựng sẵn: không nền chuyển màu tím, không biểu tượng trang trí vô nghĩa, không ảnh minh họa chung chung.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 2</b> · Trang chủ</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Thiết kế trang chủ cho máy tính và điện thoại theo thứ tự: phần mở đầu nói rõ trong một câu chúng tôi làm gì cho ai, kèm nút gọi điện hoặc nhắn Zalo; các dịch vụ chính; lý do chọn chúng tôi (chỉ dùng dữ kiện trong file); dự án tiêu biểu; câu hỏi thường gặp; khối liên hệ có bản đồ. Dùng nội dung thật trong file, chỗ thiếu ghi [CẦN BỔ SUNG].</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 3</b> · Các trang còn lại và bàn giao</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Áp dụng cùng hệ thống thiết kế cho các trang trong sơ đồ ở docs/nghien-cuu-tim-kiem.md. Sau đó tạo gói bàn giao cho Claude Code.</pre>
+        </figure>
+        <p class="aside"><strong>Góp ý càng cụ thể càng tốt.</strong> "Tiêu đề to hơn, nút liên hệ nổi bật hơn, giảm khoảng trắng giữa các thẻ dịch vụ" hiệu quả hơn nhiều so với "làm đẹp hơn".</p>
+        <p>Nếu chưa dùng được Claude Design, có thể nhờ Claude Code dựng bản mẫu tĩnh để duyệt trước:</p>
+        <figure class="prompt">
+          <figcaption><span><b>Phương án dự phòng</b> · Bản mẫu bằng Claude Code</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Chưa dựng website thật. Dựa trên ba file trong docs/, tạo bản mẫu trang chủ bằng một file HTML tĩnh để tôi xem trên trình duyệt, có cả khổ điện thoại. Tôi duyệt xong bản mẫu mới chuyển sang lập kế hoạch.</pre>
+        </figure>
+        <div class="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><p><b>Xong khi:</b> bạn đã xem và duyệt bản thiết kế trên khổ điện thoại lẫn máy tính, gói bàn giao (hoặc file HTML, PDF xuất ra) nằm trong thư mục design/ của dự án.</p></div>
+      </div>
+    </div>
+
+    <article class="step" id="buoc-4">
+      <div class="step-num"><small>Bước</small>4</div>
+      <div class="step-body reveal">
+        <h3>Lập kế hoạch trước khi viết mã</h3>
+        <div class="goal"><b>Mục tiêu</b><span>Có kế hoạch chia giai đoạn mà bạn hiểu và đã duyệt, cùng một file quy tắc Claude đọc mỗi lần làm việc.</span></div>
+        <p>File <code>CLAUDE.md</code> là sổ quy tắc của dự án. Mỗi khi bắt đầu, Claude Code đọc file này nên bạn không phải nhắc lại các yêu cầu cố định. Lệnh <code>/init</code> tạo file đó. Ở chế độ lập kế hoạch (nhấn <code>Shift + Tab</code> trong Claude Code để chuyển), Claude chỉ đọc và đề xuất, chưa sửa file nào cho tới khi bạn đồng ý.</p>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 1</b> · Sổ quy tắc, sau khi chạy /init</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Bổ sung vào CLAUDE.md các quy tắc:
+- nội dung viết tiếng Việt có dấu, câu ngắn, xưng "chúng tôi" với khách;
+- không bịa số liệu, khách hàng, chứng nhận, đánh giá;
+- mỗi trang có tiêu đề và mô tả riêng; ảnh nào cũng có mô tả thay thế;
+- làm xong mỗi giai đoạn thì chạy build và báo kết quả;
+- không đưa website lên mạng khi tôi chưa đồng ý;
+- không ghi mật khẩu hay khóa bí mật vào mã nguồn.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 2</b> · Lập kế hoạch (ở chế độ lập kế hoạch)</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Đọc docs/cam-ket-du-an.md, docs/thong-tin-doanh-nghiep.md, docs/nghien-cuu-tim-kiem.md và bản thiết kế bàn giao trong thư mục design/. Lập kế hoạch dựng website bằng Astro, lưu vào plans/ke-hoach.md. Chia thành các giai đoạn nhỏ; mỗi giai đoạn ghi việc cần làm, cách kiểm tra và tiêu chí xong. Gợi ý thứ tự:
+(1) khởi tạo dự án và bố cục chung, (2) trang chủ, (3) các trang còn lại, (4) SEO và AEO, (5) kiểm thử, (6) triển khai.
+Giải thích kế hoạch cho tôi bằng ngôn ngữ đời thường. Chỉ lưu file kế hoạch, chưa làm giai đoạn nào.</pre>
+        </figure>
+        <div class="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><p><b>Xong khi:</b> bạn kể lại được mỗi giai đoạn làm gì và đã trả lời "đồng ý" cho kế hoạch.</p></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= CHẶNG 3 ================= -->
+<section class="block k3" id="chang-3">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">Chặng 3 · Xây dựng</span>
+      <h2>Dựng từng phần nhỏ, mỗi phần một điểm lưu</h2>
+    </div>
+
+    <article class="step" id="buoc-5">
+      <div class="step-num"><small>Bước</small>5</div>
+      <div class="step-body reveal">
+        <h3>Dựng website từng phần</h3>
+        <div class="goal"><b>Mục tiêu</b><span>Mỗi giai đoạn trong kế hoạch có kết quả xem được trên máy và một điểm lưu trong Git.</span></div>
+        <p>Mỗi lần lưu (commit) trong Git giống điểm lưu khi chơi game: lỡ hỏng thì quay lại được. Claude Code cũng tự ghi lại các thay đổi trong phiên làm việc; gõ <code>/rewind</code> để lùi về thời điểm trước đó.</p>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 1</b> · Làm một giai đoạn</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Thực hiện giai đoạn 1 trong plans/ke-hoach.md. Khởi tạo Git cho dự án nếu chưa có. Xong giai đoạn thì chạy build, chạy website trên máy và cho tôi đường link xem thử, tóm tắt đã làm gì, rồi tạo một commit có mô tả rõ ràng. Dừng lại chờ tôi duyệt trước khi sang giai đoạn sau.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 2</b> · So với thiết kế</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Chụp màn hình trang vừa làm ở khổ điện thoại (rộng 375px) và máy tính (rộng 1440px), đặt cạnh bản thiết kế và liệt kê những chỗ còn lệch. Nếu máy chưa có công cụ chụp màn hình trình duyệt (như Playwright), xin phép tôi trước khi cài.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 3</b> · Khi gặp lỗi</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Trang <span class="ph">[tên trang]</span> đang bị <span class="ph">[mô tả điều bạn thấy, ví dụ: chữ tràn ra ngoài màn hình điện thoại]</span>. Chưa sửa vội. Tìm nguyên nhân gốc, giải thích cho tôi vì sao, rồi mới đề xuất cách sửa.</pre>
+        </figure>
+        <p class="aside"><strong>Cuộc trò chuyện càng dài, Claude càng dễ quên chi tiết đầu.</strong> Xong mỗi giai đoạn, gõ <code>/clear</code> để bắt đầu phiên mới, rồi mở đầu bằng: "Đọc CLAUDE.md và plans/ke-hoach.md, tiếp tục giai đoạn [số]."</p>
+        <div class="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><p><b>Xong khi:</b> mọi giai đoạn dựng đều có commit, bạn đã tự bấm qua từng trang trên đường link xem thử.</p></div>
+      </div>
+    </article>
+
+    <article class="step" id="buoc-6">
+      <div class="step-num"><small>Bước</small>6</div>
+      <div class="step-body reveal">
+        <h3>Tối ưu SEO và AEO</h3>
+        <div class="goal"><b>Mục tiêu</b><span>Google đọc hiểu được từng trang và công cụ AI tìm được câu trả lời rõ ràng để trích dẫn.</span></div>
+        <div class="cols">
+          <div class="card">
+            <h4>SEO kỹ thuật</h4>
+            <ul>
+              <li>Mỗi trang có tiêu đề (title) và mô tả (meta description) riêng</li>
+              <li>Mỗi trang đúng một tiêu đề lớn H1</li>
+              <li>Đường dẫn ngắn có nghĩa: /dich-vu/thiet-ke-noi-that</li>
+              <li>sitemap.xml và robots.txt</li>
+              <li>Ảnh nén nhẹ, có mô tả thay thế</li>
+              <li>Thẻ chia sẻ mạng xã hội, khai báo tiếng Việt</li>
+              <li>Tải nhanh trên điện thoại</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>AEO, để AI trích dẫn</h4>
+            <ul>
+              <li>Câu trả lời thẳng hai, ba câu ngay dưới mỗi tiêu đề dạng câu hỏi</li>
+              <li>Trang Câu hỏi thường gặp dùng câu hỏi thật ở bước 2</li>
+              <li>Tên, địa chỉ, số điện thoại giống hệt nhau trên website, Google Business Profile và mạng xã hội</li>
+              <li>Dữ liệu có cấu trúc (JSON-LD) mô tả doanh nghiệp</li>
+              <li>Mỗi trang ghi ngày cập nhật</li>
+            </ul>
+          </div>
+        </div>
+        <p class="aside"><strong>Đừng kỳ vọng quá nhiều.</strong> Google không còn hiển thị kết quả hỏi đáp dạng mở rộng cho website doanh nghiệp thông thường, nên đánh dấu câu hỏi thường gặp chủ yếu giúp máy đọc hiểu nội dung. File llms.txt là đề xuất để trợ lý AI đọc website dễ hơn; Google cho biết không dùng file này, lợi ích với các công cụ khác chưa được chứng minh. Làm thêm tốn ít công, nhưng đừng coi đó là bí quyết.</p>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 1</b> · Nền tảng SEO</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Thực hiện giai đoạn SEO và AEO. Với từng trang: viết title khoảng 50 đến 60 ký tự và meta description khoảng 140 đến 160 ký tự từ nội dung thật; kiểm tra chỉ có một H1; thêm thẻ Open Graph và canonical; khai báo lang="vi". Thêm sitemap bằng @astrojs/sitemap và robots.txt trỏ tới sitemap. Lập bảng title và description từng trang để tôi duyệt trước khi lưu.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 2</b> · Dữ liệu có cấu trúc và nội dung trả lời</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Thêm JSON-LD:
+- LocalBusiness (hoặc Organization nếu không có địa điểm đón khách) với tên, địa chỉ, điện thoại, giờ mở cửa, logo, mạng xã hội lấy đúng từ docs/thong-tin-doanh-nghiep.md;
+- BreadcrumbList cho trang con;
+- FAQPage chỉ cho những câu hỏi đang hiển thị trên trang.
+Không đưa vào JSON-LD thông tin nào không xuất hiện trên trang.
+Sau đó rà từng trang: đặt câu trả lời thẳng hai, ba câu ngay dưới mỗi tiêu đề dạng câu hỏi, ghi ngày cập nhật cuối trang. Nếu tốn ít công, tạo thêm /llms.txt theo chuẩn llmstxt.org. Không thay đổi số liệu hay thông tin doanh nghiệp. Kiểm tra JSON-LD bằng validator.schema.org và báo kết quả.</pre>
+        </figure>
+        <div class="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><p><b>Xong khi:</b> bạn đã duyệt bảng title và description; mở được /sitemap.xml và /robots.txt trên bản xem thử; công cụ kiểm tra schema báo không có lỗi.</p></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ================= CHẶNG 4 ================= -->
+<section class="block k4" id="chang-4">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">Chặng 4 · Phát hành</span>
+      <h2>Kiểm bằng con mắt độc lập, rồi mới đưa lên mạng</h2>
+    </div>
+
+    <article class="step" id="buoc-7">
+      <div class="step-num"><small>Bước</small>7</div>
+      <div class="step-body reveal">
+        <h3>Kiểm thử và nhờ người kiểm duyệt</h3>
+        <div class="goal"><b>Mục tiêu</b><span>Lỗi được tìm ra trước khi khách thấy và có một góc nhìn độc lập soi lại toàn bộ.</span></div>
+        <p>Người làm ra sản phẩm thường khó thấy lỗi của chính mình, Claude cũng vậy. Claude Code có thể giao việc cho một subagent, tức một trợ lý con làm việc trong bối cảnh riêng, không bị ảnh hưởng bởi cuộc trò chuyện hiện tại. Dùng nó làm người kiểm duyệt cho khách quan.</p>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 1</b> · Kiểm thử</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Kiểm thử toàn bộ website trên máy:
+- build không lỗi; mọi đường link nội bộ mở được;
+- nút gọi điện, Zalo, email hoạt động;
+- hiển thị đúng ở khổ rộng 375px, 768px và 1440px;
+- chạy Lighthouse cho trang chủ và một trang dịch vụ (cần Chrome trên máy; thiếu công cụ nào thì xin phép tôi trước khi cài), báo điểm Performance, Accessibility, Best Practices, SEO.
+Lập bảng lỗi xếp theo mức độ nghiêm trọng, chưa sửa vội.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 2</b> · Người kiểm duyệt độc lập</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Giao cho một subagent riêng vai người kiểm duyệt khó tính, chỉ đưa cho nó docs/cam-ket-du-an.md, docs/thong-tin-doanh-nghiep.md và mã nguồn. Nhiệm vụ:
+- đối chiếu từng tiêu chí nghiệm thu với bằng chứng thực tế;
+- tìm thông tin bịa hoặc không khớp file thông tin;
+- xem website như khách lần đầu ghé trên điện thoại: trong 5 giây có hiểu chúng tôi làm gì và liên hệ thế nào không;
+- thử hỏi "<span class="ph">[một câu hỏi thật của khách]</span>" và chỉ ra trang nào trả lời được.
+Báo cáo theo dạng: vấn đề, vị trí, bằng chứng, mức độ, cách sửa đề xuất.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 3</b> · Sửa và kiểm lại</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Sửa các lỗi mức cao và trung bình trong hai báo cáo. Sửa xong, chạy lại đúng các bài kiểm tra đó và cho tôi xem kết quả trước và sau.</pre>
+        </figure>
+        <p class="aside">Ngoài ra, tự mở website trên điện thoại thật và nhờ một người chưa biết dự án đọc thử.</p>
+        <div class="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><p><b>Xong khi:</b> không còn lỗi mức cao; điểm Lighthouse mỗi nhóm từ 90 trở lên (mức tham khảo, không bắt buộc); bạn đã tự bấm thử trên điện thoại thật.</p></div>
+      </div>
+    </article>
+
+    <article class="step" id="buoc-8">
+      <div class="step-num"><small>Bước</small>8</div>
+      <div class="step-body reveal">
+        <h3>Đưa lên mạng và chăm sóc</h3>
+        <div class="goal"><b>Mục tiêu</b><span>Website chạy trên tên miền thật, Google biết đến nó và bạn có cách cập nhật về sau.</span></div>
+        <p>Claude đưa mã nguồn lên một kho riêng tư trên GitHub. Bạn kết nối kho đó với Vercel (Vercel tự nhận ra dự án Astro), gắn tên miền, khai báo website với Google Search Console và Bing Webmaster Tools rồi gửi sitemap, sau đó cập nhật đường link website trên Google Business Profile. Từ đó, mỗi lần mã mới được đẩy lên GitHub, Vercel tự cập nhật website.</p>
+        <p class="warn">Mật khẩu, mã xác thực và khóa bí mật thì bạn tự nhập trên trình duyệt. Không dán chúng vào cuộc trò chuyện với Claude.</p>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 1</b> · Triển khai</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Hướng dẫn tôi từng bước đưa dự án lên một kho riêng tư trên GitHub, rồi triển khai lên Vercel. Bước nào cần tôi thao tác trên trình duyệt thì mô tả việc cần làm và kết quả tôi sẽ thấy, chờ tôi xác nhận rồi mới làm tiếp. Kiểm tra để chắc không có file chứa mật khẩu hay khóa bí mật bị đưa lên GitHub.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 2</b> · Kiểm tra bản thật</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Website đã chạy tại <span class="ph">[địa chỉ]</span>. Kiểm tra trên bản thật: /sitemap.xml, /robots.txt và /llms.txt (nếu có) mở được; JSON-LD hợp lệ; HTTPS hoạt động; địa chỉ có www và không www dẫn về cùng một nơi. Sau đó hướng dẫn tôi xác minh tên miền trên Google Search Console và gửi sitemap.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 3</b> · Ghi nhật ký dự án</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Viết nhật ký dự án vào docs/nhat-ky.md: đã làm gì, các quyết định quan trọng và lý do, vấn đề gặp phải và cách xử lý, việc còn dở. Bổ sung vào CLAUDE.md những bài học để lần sau làm nhanh hơn.</pre>
+        </figure>
+        <figure class="prompt">
+          <figcaption><span><b>Câu lệnh mẫu 4</b> · Thêm dịch vụ mới về sau</span><button class="copy" type="button">Sao chép</button></figcaption>
+<pre>Tôi muốn thêm dịch vụ <span class="ph">[mô tả]</span>. Đọc CLAUDE.md và các file trong docs/ trước. Đề xuất trang mới theo đúng hệ thống thiết kế và chuẩn SEO, AEO đang có, chờ tôi duyệt rồi làm. Xong thì kiểm thử, commit và đẩy lên GitHub để Vercel tự cập nhật.</pre>
+        </figure>
+        <p class="aside">Mỗi tháng, xem Search Console một lần: khách tìm đến bằng cụm từ nào, có câu hỏi mới nào đáng đưa vào trang Câu hỏi thường gặp.</p>
+        <div class="done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><p><b>Xong khi:</b> gõ tên miền là thấy website; Search Console báo đã nhận sitemap; docs/nhat-ky.md ghi lại toàn bộ quá trình.</p></div>
+      </div>
+    </article>
+
+    <h3 class="sub reveal" id="cau-nen-thuoc">Sáu câu nên thuộc lòng</h3>
+    <ul class="mantras reveal">
+      <li><span>"Chưa viết mã, hỏi tôi trước."</span><button class="copy" type="button">Sao chép</button></li>
+      <li><span>"Chỉ dùng dữ kiện trong file, thiếu thì ghi [CẦN BỔ SUNG]."</span><button class="copy" type="button">Sao chép</button></li>
+      <li><span>"Làm xong giai đoạn này thì dừng, chờ tôi duyệt."</span><button class="copy" type="button">Sao chép</button></li>
+      <li><span>"Tìm nguyên nhân gốc trước khi sửa."</span><button class="copy" type="button">Sao chép</button></li>
+      <li><span>"Cho tôi xem bằng chứng: ảnh chụp, đường link hoặc kết quả kiểm tra."</span><button class="copy" type="button">Sao chép</button></li>
+      <li><span>"Giải thích cho tôi như với người không biết code."</span><button class="copy" type="button">Sao chép</button></li>
+    </ul>
+
+    <h3 class="sub reveal">Năm lỗi người mới hay gặp</h3>
+    <ol class="mistakes read reveal">
+      <li><span>Bảo Claude "làm cho tôi một website đẹp" rồi để Claude tự quyết hết. Kết quả trông giống hàng nghìn website khác và đầy thông tin bịa.</span></li>
+      <li><span>Gộp mọi yêu cầu vào một câu lệnh dài. Chia nhỏ, làm từng giai đoạn.</span></li>
+      <li><span>Không lưu điểm Git, đến khi hỏng thì không quay lại được.</span></li>
+      <li><span>Tin lời "đã xong" mà không tự mở trang xem.</span></li>
+      <li><span>Nhồi từ khóa. Viết cho khách đọc trước, cho máy đọc sau.</span></li>
+    </ol>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <h2>Nguồn tham khảo</h2>
+    <ol class="refs">
+      <li>Claude Code, hướng dẫn cài đặt: <a href="https://code.claude.com/docs/en/setup">code.claude.com/docs/en/setup</a></li>
+      <li>Giới thiệu Claude Design (Anthropic Labs, 04/2026), tin tổng hợp: <a href="https://www.unite.ai/anthropic-launches-claude-design-for-visual-prototyping-and-presentations/">Unite.AI</a> và <a href="https://the-decoder.com/anthropics-claude-design-turns-chatbot-conversations-into-prototypes-slide-decks-and-marketing-assets/">The Decoder</a></li>
+      <li>Giá các gói Claude: <a href="https://claude.com/pricing">claude.com/pricing</a></li>
+      <li>Google Search Central, tính năng AI và website: <a href="https://developers.google.com/search/docs/appearance/ai-features">developers.google.com/search/docs/appearance/ai-features</a></li>
+      <li>Google thu hẹp kết quả FAQ và HowTo (08/2023): <a href="https://developers.google.com/search/blog/2023/08/howto-faq-changes">developers.google.com/search/blog/2023/08/howto-faq-changes</a></li>
+      <li>Chuẩn llms.txt: <a href="https://llmstxt.org/">llmstxt.org</a></li>
+      <li>Astro, tích hợp sitemap: <a href="https://docs.astro.build/en/guides/integrations-guide/sitemap/">docs.astro.build</a></li>
+      <li>Vercel, triển khai Astro: <a href="https://vercel.com/docs/frameworks/frontend/astro">vercel.com/docs/frameworks/frontend/astro</a></li>
+      <li>Vercel, gói Hobby và chính sách sử dụng hợp lý: <a href="https://vercel.com/docs/plans/hobby">vercel.com/docs/plans/hobby</a> và <a href="https://vercel.com/docs/limits/fair-use-guidelines">fair use guidelines</a></li>
+      <li>Công cụ kiểm tra schema: <a href="https://validator.schema.org/">validator.schema.org</a></li>
+      <li>Google Search Console: <a href="https://search.google.com/search-console">search.google.com/search-console</a></li>
+    </ol>
+    <p class="fine">Giá, gói dịch vụ và tính năng của Claude, Claude Design và Vercel có thể thay đổi; kiểm tra trang chính thức trước khi đăng ký. Xưởng Mộc An trong bản phác là ví dụ minh họa. Cập nhật ngày 22/10/2026.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  root.classList.add('js');
+
+  /* Theme: system / light / dark */
+  var KEY='vc-theme', btns=document.querySelectorAll('.theme button');
+  function setTheme(v){
+    root.setAttribute('data-theme',v);
+    btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.set===v))});
+    try{localStorage.setItem(KEY,v)}catch(e){}
+  }
+  var saved=null; try{saved=localStorage.getItem(KEY)}catch(e){}
+  if(saved==='light'||saved==='dark'||saved==='system') setTheme(saved);
+  btns.forEach(function(b){b.addEventListener('click',function(){setTheme(b.dataset.set)})});
+
+  /* Copy buttons */
+  function fallbackCopy(text){
+    var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');
+    ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+    var ok=false;try{ok=document.execCommand('copy')}catch(e){}
+    document.body.removeChild(ta);return ok;
+  }
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.setAttribute('aria-live','polite');
+    btn.addEventListener('click',function(){
+      var host=btn.closest('.prompt'), text;
+      if(host){text=host.querySelector('pre').innerText.trim()}
+      else{text=btn.parentElement.querySelector('span').innerText.replace(/^"|"$/g,'').trim()}
+      var done=function(){btn.textContent='Đã chép';btn.setAttribute('data-done','');
+        setTimeout(function(){btn.textContent='Sao chép';btn.removeAttribute('data-done')},1800)};
+      if(navigator.clipboard&&window.isSecureContext){
+        navigator.clipboard.writeText(text).then(done,function(){if(fallbackCopy(text))done()});
+      }else if(fallbackCopy(text)){done()}
+    });
+  });
+
+  /* Gentle reveal; content stays visible without JS or with reduced motion */
+  var items=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){
+    items.forEach(function(el){el.classList.add('in')});return;
+  }
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.05});
+  items.forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>
